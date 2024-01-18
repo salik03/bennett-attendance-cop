@@ -1,4 +1,43 @@
-.qr-container-inside{
-  height: 50dvh;
-  width: 50dvh;
+.qr-code-display{
+  width: 50dvw;
+  height: 70dvh;
+  border: 1px solid black;
+}
+.upper{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10dvh;
+    margin-bottom: 10dvh;
+}
+.qrButton{
+  margin-bottom: 5dvh;
+}
+
+.r{
+  margin-bottom: 20dvh;
+}
+
+.table{
+    display: flex;
+    justify-content: center;
+    
+    padding: 7dvh 0 7dvh 0;
+  
+}
+.table2{
+  width: 70dvw;
+  
+}
+.pdfButton{
+  width: 8dvw;
+  height: 8dvh;
+  border: 1px solid rgb(7, 7, 7);
+  margin-left: 3dvw;
+  border-radius: 10px;
+
+}
+.pdfButton:hover{
+  cursor: pointer;
+  display: inline-block;
 }

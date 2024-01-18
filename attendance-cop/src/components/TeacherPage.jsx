@@ -17,7 +17,6 @@ import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Icon } from '@mui/material';
 
-
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 // TODO remove, this demo shouldn't need to reset the theme.
@@ -67,7 +66,7 @@ export default function TeacherPage() {
               justifyContent="center"
             >
               <Button variant="contained">View Attendance Statistics</Button>
-              <Button variant="outlined">Edit Classes</Button>
+              <Button variant="outlined"> Edit Classes</Button>
             </Stack>
           </Container>
           
@@ -101,7 +100,7 @@ export default function TeacherPage() {
                     </Typography>
                   </CardContent>
                   <CardActions>
-                    <Button size="small">Take Attendance</Button>
+                    <Link href='/attendance'><Button size="small">Take Attendance </Button></Link>
                     <Button size="small">Edit</Button>
                   </CardActions>
                 </Card>
