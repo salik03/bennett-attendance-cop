@@ -10,22 +10,10 @@ import Paper from '@mui/material/Paper';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
-function createData(Enrollment, name, group) {
-  return { Enrollment, name, group };
-}
-
-const rows = [
-  createData('Frozen yoghurt', 'random data', 'group'),
-  createData('Frozen yoghurt', 'random data', 'group'),
-  createData('Frozen yoghurt', 'random data', 'group'),
-  createData('Frozen yoghurt', 'random data', 'group'),
-  createData('Frozen yoghurt', 'random data', 'group'),
-  createData('Frozen yoghurt', 'random data', 'group'),
-];
-
 const Attendance = () => {
   const pdfRef = useRef();
   const [imageSrc, setImageSrc] = useState('');
+  const [rows, setRows] = useState([]);
 
   const generateQRCode = async () => {
     // Fetching image from the API
@@ -40,6 +28,21 @@ const Attendance = () => {
       setImageSrc(url);
     } catch (error) {
       console.error('Error fetching image:', error);
+    }
+  };
+
+  const fetchData = async () => {
+    // Fetching data for rows from the API
+    try {
+      const response = await fetch('https://api.example.com/data');
+      if (!response.ok) {
+        throw new Error('Data API request failed');
+      }
+
+      const data = await response.json();
+      setRows(data); // Assuming the API response is an array of objects
+    } catch (error) {
+      console.error('Error fetching data:', error);
     }
   };
 
@@ -60,7 +63,14 @@ const Attendance = () => {
 
   useEffect(() => {
     generateQRCode();
-  }, []); // Call the API on component mount
+    fetchData(); // Initial fetch
+
+    const intervalId = setInterval(() => {
+      fetchData(); // Fetch data every 3 seconds
+    }, 3000);
+
+    return () => clearInterval(intervalId); // Cleanup on component unmount
+  }, []); // Call the APIs on component mount
 
   return (
     <div style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>
