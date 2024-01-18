@@ -3,23 +3,17 @@ import Button from '@mui/material/Button';
 
 
 
-const attendance = () => {
+const Attendance = () => {
   return (
     <div>
-        
-            
       <Button variant="contained">Generate Qr </Button>
         <div className="qr-container">
-            <div className="qr-container-inside">
-                
-
+            <div className="qr-container-inside">            
             </div>
-
         </div>
-
 
     </div>
   )
 }
 
-export default attendance
+export default Attendance
