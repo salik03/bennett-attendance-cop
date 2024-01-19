@@ -137,9 +137,9 @@ const Attendance = () => {
             </Table>
           </TableContainer>
         </div>
-        <button className="pdfButton" onClick={downloadPDF}>
+        <Button variant="contained" color='success' size='medium' onClick={downloadPDF}>
           Download PDF
-        </button>
+        </Button>
       </div>
     </div>
     </>
