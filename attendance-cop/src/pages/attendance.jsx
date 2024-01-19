@@ -9,6 +9,12 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
+import AppBar from '@mui/material/AppBar';
+import Toolbar from '@mui/material/Toolbar';
+import Typography from '@mui/material/Typography';
+import CssBaseline from '@mui/material/CssBaseline';
+import { Icon } from '@mui/material';
+
 
 const Attendance = () => {
   const pdfRef = useRef();
@@ -71,8 +77,27 @@ const Attendance = () => {
     return () => clearInterval(intervalId); 
   }, []); 
 
-  return (
-    <div style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>
+  return (<>
+     
+
+     <Typography
+              component="h1"
+              variant="h3"
+              align="center"
+              color="text.primary"
+              gutterBottom
+            >
+              Attendance portal
+            </Typography>
+            <Typography variant="h5" align="center" color="text.secondary" paragraph>
+              Scan the QR to mark attendance
+            </Typography>
+   
+     
+      
+      
+      
+          <div style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>
       <div className="upper">
         <div className="qr-code-display">
           <img alt="QR Code" src={imageSrc} />
@@ -117,6 +142,7 @@ const Attendance = () => {
         </button>
       </div>
     </div>
+    </>
   );
 };
 
