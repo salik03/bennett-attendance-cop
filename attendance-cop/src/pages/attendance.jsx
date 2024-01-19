@@ -16,7 +16,6 @@ const Attendance = () => {
   const [rows, setRows] = useState([]);
 
   const generateQRCode = async () => {
-    // Fetching image from the API
     try {
       const response = await fetch('https://api.example.com/image.png');
       if (!response.ok) {
@@ -32,7 +31,7 @@ const Attendance = () => {
   };
 
   const fetchData = async () => {
-    // Fetching data for rows from the API
+    
     try {
       const response = await fetch('https://api.example.com/data');
       if (!response.ok) {
@@ -40,7 +39,7 @@ const Attendance = () => {
       }
 
       const data = await response.json();
-      setRows(data); // Assuming the API response is an array of objects
+      setRows(data);
     } catch (error) {
       console.error('Error fetching data:', error);
     }
@@ -63,14 +62,14 @@ const Attendance = () => {
 
   useEffect(() => {
     generateQRCode();
-    fetchData(); // Initial fetch
+    fetchData(); 
 
     const intervalId = setInterval(() => {
       fetchData(); // Fetch data every 3 seconds
     }, 3000);
 
-    return () => clearInterval(intervalId); // Cleanup on component unmount
-  }, []); // Call the APIs on component mount
+    return () => clearInterval(intervalId); 
+  }, []); 
 
   return (
     <div style={{ textAlign: 'center', marginTop: '20px', marginBottom: '20px' }}>
