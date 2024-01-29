@@ -31,7 +31,7 @@ export default function TeacherPage() {
       <img src="src/assets/bennett.png" alt="camera" />
     </Icon>
           <Typography variant="h6" color="inherit" noWrap>
-           Attendance cop
+           Attendance COP
           </Typography>
         </Toolbar>
       </AppBar>
