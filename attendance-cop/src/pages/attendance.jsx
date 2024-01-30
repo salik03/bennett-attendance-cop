@@ -10,6 +10,7 @@ import Paper from '@mui/material/Paper';
 import Typography from '@mui/material/Typography';
 import * as XLSX from 'xlsx';
 import axios from 'axios';
+import ServerStatusIndicator from '../components/ServerCheck';
 
 const Attendance = () => {
   const pdfRef = useRef();
@@ -141,7 +142,7 @@ const Attendance = () => {
           </TableContainer>
         </div>
       </div>
-        
+        <ServerStatusIndicator/>
     </div>
     </>
   );
