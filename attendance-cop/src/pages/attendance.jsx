@@ -20,6 +20,7 @@ const Attendance = () => {
   const [attendanceInProgress, setAttendanceInProgress] = useState(false);
   const [token, setToken] = useState("");
   const [timer, setTimer] = useState(5);
+  const [data, setData] = useState([""]);
 
   const generateQRCode = async () => {
     try {
@@ -39,9 +40,8 @@ const Attendance = () => {
 
       setImageSrc(`data:image/png;base64,${data.qr_code_base64}`);
       setToken(data.token);
-      
-      return data.token;
 
+      return data.token;
     } catch (error) {
       console.error("Error fetching QR code:", error);
     }
@@ -49,7 +49,7 @@ const Attendance = () => {
 
   const startAttendance = async () => {
     setAttendanceInProgress(true);
-    const token=await generateQRCode();
+    const token = await generateQRCode();
 
     console.log(token);
 
@@ -57,7 +57,6 @@ const Attendance = () => {
   };
 
   const stopAttendance = async (token) => {
-
     try {
       console.log("Attempting to stop attendance..."); // Add this log
       const response = await axios.get(
@@ -79,7 +78,7 @@ const Attendance = () => {
   };
 
   const startTimer = (token) => {
-    let countdown = 5; 
+    let countdown = 5;
 
     const intervalId = setInterval(() => {
       setTimer(countdown);
@@ -88,9 +87,9 @@ const Attendance = () => {
       if (countdown < 0) {
         clearInterval(intervalId);
         console.log("reached");
-        stopAttendance(token); 
+        stopAttendance(token);
       }
-    }, 1000); 
+    }, 1000);
   };
 
   const fetchData = async () => {
@@ -118,6 +117,30 @@ const Attendance = () => {
       console.error("Error fetching data from Supabase:", error);
     }
   };
+
+  useEffect(() => {
+    const fetchDataAndAttendance = async () => {
+      try {
+        let { data: attendance, error } = await supabase
+          .from("attendance")
+          .select("*");
+
+        if (attendance) {
+          setData(attendance);
+        }
+
+        console.log(attendance);
+      } catch (error) {
+        console.log(error);
+      }
+
+      fetchData();
+    };
+
+    const intervalId = setInterval(fetchDataAndAttendance, 3000);
+
+    return () => clearInterval(intervalId);
+  }, []);
 
   const downloadExcel = () => {
     const header = ["Enrollment No", "Name", "Timestamp"];
@@ -219,22 +242,22 @@ const Attendance = () => {
               <Table sx={{ minWidth: 450 }} aria-label="simple table">
                 <TableHead>
                   <TableRow>
-                    <TableCell>Enrollment No</TableCell>
+                    <TableCell>Id</TableCell>
+                    <TableCell align="right">Email</TableCell>
                     <TableCell align="right">Name</TableCell>
-                    <TableCell align="right">TimeStamp</TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
-                  {rows.map((row) => (
+                  {data.map((row) => (
                     <TableRow
                       key={row.Enrollment}
                       sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <TableCell component="th" scope="row">
-                        {row.Enrollment}
+                        {row.id}
                       </TableCell>
-                      <TableCell align="right">{row.name}</TableCell>
-                      <TableCell align="right">{row.group}</TableCell>
+                      <TableCell align="right">{row.mail}</TableCell>
+                      <TableCell align="right">{row.displayname}</TableCell>
                     </TableRow>
                   ))}
                 </TableBody>
