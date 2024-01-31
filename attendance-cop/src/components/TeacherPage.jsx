@@ -16,6 +16,7 @@ import Container from '@mui/material/Container';
 import Link from '@mui/material/Link';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import { Icon } from '@mui/material';
+import ServerStatusIndicator from './ServerCheck';
 
 const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -33,6 +34,7 @@ export default function TeacherPage() {
           <Typography variant="h6" color="inherit" noWrap>
            Attendance COP
           </Typography>
+          <ServerStatusIndicator></ServerStatusIndicator>
         </Toolbar>
       </AppBar>
       <main>
